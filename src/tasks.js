@@ -1,4 +1,5 @@
 import Counter from "./pages/counter";
+import TemperatureConverter from "./pages/temperatureConverter";
 
 const tasks = [
   {
@@ -9,6 +10,7 @@ const tasks = [
   {
     text: "Temperature Counter",
     path: "/temperature",
+    component: TemperatureConverter,
   },
   {
     text: "Flight booker",
