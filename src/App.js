@@ -1,5 +1,6 @@
 import logo from "./logo.svg";
 import "./App.scss";
+import Counter from "./pages/counter";
 
 function App() {
   const tasks = [
@@ -35,7 +36,7 @@ function App() {
         </ol>
       </section>
       <section className="task-container app-child">
-        {"This where the component will show up"}
+        <Counter />
       </section>
     </div>
   );
