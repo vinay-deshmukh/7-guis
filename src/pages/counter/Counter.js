@@ -3,12 +3,13 @@ import PropTypes from "prop-types";
 
 import styles from "./Counter.module.scss";
 import PageContainer from "../../components/PageContainer";
+import PageTitle from "../../components/PageTitle";
 
 function Counter(props) {
   const { count, increment, decrement, reset } = useCounter();
   return (
     <PageContainer>
-      <h2>{"Counter"}</h2>
+      <PageTitle>{"Counter"}</PageTitle>
       <input className={styles.count} readOnly value={count} />
       <div className={styles.buttonsContainer}>
         <button className={styles.button} onClick={() => increment()}>
