@@ -1,4 +1,5 @@
 import Counter from "./pages/counter";
+import FlightBooker from "./pages/flightBooker";
 import TemperatureConverter from "./pages/temperatureConverter";
 
 const tasks = [
@@ -14,6 +15,8 @@ const tasks = [
   },
   {
     text: "Flight booker",
+    path: "/flightBooker",
+    component: FlightBooker,
   },
   {
     text: "Timer",
