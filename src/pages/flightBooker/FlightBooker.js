@@ -117,19 +117,26 @@ const FlightType = {
 };
 
 function initFlightBookerState() {
-  const today = new Date();
-  const validDateString = `${today.getDate()}.${
-    (today.getMonth() + 1).toString().padStart(2, '0')
-  }.${today.getFullYear()}`;
   let fromDate;
   let toDate;
-  fromDate = toDate = validDateString;
+  fromDate = toDate = getTodayValidDateString();
+
   let typeOfFlight = FlightType.ONEWAY;
   let isToDateEnabled = false;
+
   return {
     fromDate,
     toDate,
     typeOfFlight,
     isToDateEnabled,
   };
+}
+
+function getTodayValidDateString() {
+  const today = new Date();
+  const date = today.getDate().toString().padStart(2, "0");
+  const month = (today.getMonth() + 1).toString().padStart(2, "0");
+  const year = today.getFullYear().toString().padStart(4, "0");
+
+  return `${date}.${month}.${year}`;
 }
