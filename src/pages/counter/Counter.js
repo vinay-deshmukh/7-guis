@@ -2,11 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import styles from "./Counter.module.scss";
+import PageContainer from "../../components/PageContainer";
 
 function Counter(props) {
   const { count, increment, decrement, reset } = useCounter();
   return (
-    <article className={styles.container}>
+    <PageContainer>
       <h2>{"Counter"}</h2>
       <input className={styles.count} readOnly value={count} />
       <div className={styles.buttonsContainer}>
@@ -20,7 +21,7 @@ function Counter(props) {
           {"Reset"}
         </button>
       </div>
-    </article>
+    </PageContainer>
   );
 }
 

@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import PageContainer from "../../components/PageContainer";
 
 function TemperatureConverter(props) {
   const {
@@ -9,7 +10,7 @@ function TemperatureConverter(props) {
     handleChangeFahrenheit,
   } = useTemperature();
   return (
-    <article>
+    <PageContainer>
       <h2>{"TemperatureConverter"}</h2>
       <input
         value={celsius}
@@ -25,7 +26,7 @@ function TemperatureConverter(props) {
         }}
       />{" "}
       {"Fahrenheit"}
-    </article>
+    </PageContainer>
   );
 }
 
