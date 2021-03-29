@@ -1,23 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.scss";
 
 function App() {
+  const tasks = [
+    {
+      text: "Counter",
+    },
+    {
+      text: "Temperature Counter",
+    },
+    {
+      text: "Flight booker",
+    },
+    {
+      text: "Timer",
+    },
+    {
+      text: "CRUD",
+    },
+    {
+      text: "Circle Drawer",
+    },
+    {
+      text: "Cells",
+    },
+  ];
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <section className="table-contents app-child">
+        <ol>
+          {tasks.map((task, index) => (
+            <li key={index}>{task.text}</li>
+          ))}
+        </ol>
+      </section>
+      <section className="task-container app-child">
+        {"This where the component will show up"}
+      </section>
     </div>
   );
 }

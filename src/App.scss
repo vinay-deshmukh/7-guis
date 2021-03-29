@@ -1,0 +1,21 @@
+.App {
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 50rem;
+  height: 100vh;
+
+  .app-child {
+    width: 48%;
+    height: 60%;
+  }
+}
+
+.table-contents {
+  background: cadetblue;
+}
+
+.task-container {
+  background: darkturquoise;
+}
