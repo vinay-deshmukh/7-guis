@@ -38,11 +38,10 @@ FlightBooker.propTypes = {};
 export default FlightBooker;
 
 function useFlightBooker() {
-  const [{ fromDate, toDate, typeOfFlight, isToDateEnabled }, dispatch] = React.useReducer(
-    flightBookerReducer,
-    undefined,
-    initFlightBookerState
-  );
+  const [
+    { fromDate, toDate, typeOfFlight, isToDateEnabled },
+    dispatch,
+  ] = React.useReducer(flightBookerReducer, undefined, initFlightBookerState);
 
   const handleChangeFrom = (event) =>
     dispatch({
@@ -85,8 +84,7 @@ function flightBookerReducer(state, action) {
   switch (action.type) {
     case UPDATE_DROPDOWN: {
       const typeOfFlight = action.payload.typeOfFlight;
-      const isToDateEnabled =
-        typeOfFlight === FlightType.ONEWAY ? false : true;
+      const isToDateEnabled = typeOfFlight === FlightType.ONEWAY ? false : true;
       return {
         ...state,
         typeOfFlight,
@@ -119,8 +117,13 @@ const FlightType = {
 };
 
 function initFlightBookerState() {
+  const today = new Date();
+  const validDateString = `${today.getDate()}.${
+    (today.getMonth() + 1).toString().padStart(2, '0')
+  }.${today.getFullYear()}`;
   let fromDate;
   let toDate;
+  fromDate = toDate = validDateString;
   let typeOfFlight = FlightType.ONEWAY;
   let isToDateEnabled = false;
   return {
