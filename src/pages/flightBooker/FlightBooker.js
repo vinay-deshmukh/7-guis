@@ -1,7 +1,7 @@
 import React from "react";
 import PageContainer from "../../components/PageContainer";
 import PageTitle from "../../components/PageTitle";
-import DateInput from "./DateInput";
+import DateInput, { isValidDate } from "./DateInput";
 
 function FlightBooker(props) {
   const {
@@ -14,6 +14,11 @@ function FlightBooker(props) {
 
     typeOfFlight,
     handleChangeDropdown,
+
+    isBookingAllowed,
+    isBookingMessageVisible,
+    showBookingMessage,
+    bookingConfirmMessage,
   } = useFlightBooker();
   return (
     <PageContainer>
@@ -28,6 +33,10 @@ function FlightBooker(props) {
         onChange={handleChangeTo}
         disabled={!isToDateEnabled}
       />
+      <button disabled={!isBookingAllowed} onClick={() => showBookingMessage()}>
+        {"Book"}
+      </button>
+      {isBookingMessageVisible ? <p>{bookingConfirmMessage}</p> : null}
     </PageContainer>
   );
 }
@@ -38,9 +47,26 @@ export default FlightBooker;
 
 function useFlightBooker() {
   const [
-    { fromDate, toDate, typeOfFlight, isToDateEnabled },
+    {
+      fromDate,
+      toDate,
+      typeOfFlight,
+      isToDateEnabled,
+
+      isBookingMessageVisible,
+      isBookingAllowed,
+      bookingConfirmMessage,
+    },
     dispatch,
-  ] = React.useReducer(flightBookerReducer, undefined, initFlightBookerState);
+  ] = React.useReducer(
+    (state, action) => {
+      const flightState = flightBookerReducer(state, action);
+      const afterBookingMessageState = bookingMessageReducer(flightState);
+      return afterBookingMessageState;
+    },
+    undefined,
+    initFlightBookerState
+  );
 
   const handleChangeFrom = (event) =>
     dispatch({
@@ -66,6 +92,11 @@ function useFlightBooker() {
       },
     });
 
+  const showBookingMessage = () =>
+    dispatch({
+      type: SHOW_BOOKING_MESSAGE,
+    });
+
   return {
     fromDate,
     handleChangeFrom,
@@ -76,10 +107,22 @@ function useFlightBooker() {
 
     typeOfFlight,
     handleChangeDropdown,
+
+    isBookingAllowed,
+    isBookingMessageVisible,
+    showBookingMessage,
+    bookingConfirmMessage,
   };
 }
 
 function flightBookerReducer(state, action) {
+  if (action.type !== SHOW_BOOKING_MESSAGE) {
+    state = {
+      ...state,
+      isBookingMessageVisible: false,
+    };
+  }
+
   switch (action.type) {
     case UPDATE_DROPDOWN: {
       const typeOfFlight = action.payload.typeOfFlight;
@@ -102,6 +145,12 @@ function flightBookerReducer(state, action) {
         toDate: action.payload.to,
       };
     }
+    case SHOW_BOOKING_MESSAGE: {
+      return {
+        ...state,
+        isBookingMessageVisible: true,
+      };
+    }
     default:
       throw new Error("Invalid action");
   }
@@ -109,11 +158,31 @@ function flightBookerReducer(state, action) {
 const UPDATE_DROPDOWN = "updateDropdown";
 const UPDATE_FROM = "updateFrom";
 const UPDATE_TO = "updateTo";
+const SHOW_BOOKING_MESSAGE = "showBookingMessage";
 
 const FlightType = {
   ONEWAY: "oneway",
   RETURN: "return",
 };
+
+function bookingMessageReducer(state) {
+  const bookingConfirmMessage = getBookingMessage({
+    typeOfFlight: state.typeOfFlight,
+    fromDate: state.fromDate,
+    toDate: state.toDate,
+  });
+
+  return {
+    ...state,
+    bookingConfirmMessage,
+    isBookingAllowed: getIsBookingAllowed(bookingConfirmMessage),
+  };
+}
+
+// function bookingMessageVisibilityReducer(state, action) {
+
+//   switch(action.type)
+// }
 
 function initFlightBookerState() {
   let fromDate;
@@ -121,6 +190,13 @@ function initFlightBookerState() {
   fromDate = toDate = getTodayValidDateString();
 
   let typeOfFlight = FlightType.ONEWAY;
+  let bookingConfirmMessage = getBookingMessage({
+    typeOfFlight,
+    fromDate,
+    toDate,
+  });
+  let isBookingAllowed = getIsBookingAllowed(bookingConfirmMessage);
+  let isBookingMessageVisible = false;
   let isToDateEnabled = false;
 
   return {
@@ -128,7 +204,36 @@ function initFlightBookerState() {
     toDate,
     typeOfFlight,
     isToDateEnabled,
+    isBookingAllowed,
+    bookingConfirmMessage,
+    isBookingMessageVisible,
   };
+}
+
+/**
+ * Returns booking message, or null is dates are not valid.
+ * @param {} param0
+ * @returns
+ */
+function getBookingMessage({ typeOfFlight, fromDate, toDate }) {
+  const INVALID = null;
+  if (typeOfFlight === FlightType.ONEWAY) {
+    if (!isValidDate(fromDate)) {
+      return INVALID;
+    }
+    return `You have booked a one-way flight on ${fromDate}`;
+  } else if (typeOfFlight === FlightType.RETURN) {
+    if (!isValidDate(fromDate) || !isValidDate(toDate)) {
+      return INVALID;
+    }
+    return `You have booked a flight on ${fromDate} and return on ${toDate}`;
+  } else {
+    throw new Error("Invalid flight type");
+  }
+}
+
+function getIsBookingAllowed(bookingMessage) {
+  return bookingMessage !== null;
 }
 
 function getTodayValidDateString() {

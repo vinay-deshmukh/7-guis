@@ -18,7 +18,7 @@ function DateInput(props) {
   );
 }
 
-function isValidDate(text) {
+export function isValidDate(text) {
   return /^\d{2}\.\d{2}\.\d{4}$/.test(text);
 }
 
