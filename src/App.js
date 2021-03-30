@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.scss";
 import Tasks from "./tasks";
 import { Route, Switch } from "react-router";
