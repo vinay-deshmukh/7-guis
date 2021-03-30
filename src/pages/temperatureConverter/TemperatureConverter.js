@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import PageContainer from "../../components/PageContainer";
 import PageTitle from "../../components/PageTitle";
 

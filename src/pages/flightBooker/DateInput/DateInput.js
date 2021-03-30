@@ -22,6 +22,8 @@ function isValidDate(text) {
   return /^\d{2}\.\d{2}\.\d{4}$/.test(text);
 }
 
-DateInput.propTypes = {};
+DateInput.propTypes = {
+  className: PropTypes.string,
+};
 
 export default DateInput;
