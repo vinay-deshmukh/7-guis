@@ -18,8 +18,19 @@ function DateInput(props) {
   );
 }
 
+export const DATE_REGEX = /^(?<day>\d{2})\.(?<month>\d{2})\.(?<year>\d{4})$/;
 export function isValidDate(text) {
-  return /^\d{2}\.\d{2}\.\d{4}$/.test(text);
+  return DATE_REGEX.test(text);
+}
+export function getNumberFromDate(validDate) {
+  if (!isValidDate(validDate)) {
+    throw new Error("ill formatted date");
+  }
+  const {
+    groups: { day, month, year },
+  } = validDate.match(DATE_REGEX);
+
+  return +year * 1e4 + +month * 1e2 + +day;
 }
 
 DateInput.propTypes = {

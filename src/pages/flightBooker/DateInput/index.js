@@ -1,1 +1,1 @@
-export { default, isValidDate } from "./DateInput";
+export { default, isValidDate, getNumberFromDate } from "./DateInput";

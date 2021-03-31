@@ -1,7 +1,7 @@
 import React from "react";
 import PageContainer from "../../components/PageContainer";
 import PageTitle from "../../components/PageTitle";
-import DateInput, { isValidDate } from "./DateInput";
+import DateInput, { getNumberFromDate, isValidDate } from "./DateInput";
 
 function FlightBooker(props) {
   const {
@@ -20,6 +20,8 @@ function FlightBooker(props) {
     showBookingMessage,
     bookingConfirmMessage,
   } = useFlightBooker();
+  const enableToDate =
+    isToDateEnabled && (!isValidDate(toDate) || isBookingAllowed);
   return (
     <PageContainer>
       <PageTitle>{"Flight Booker"}</PageTitle>
@@ -31,7 +33,7 @@ function FlightBooker(props) {
       <DateInput
         value={toDate}
         onChange={handleChangeTo}
-        disabled={!isToDateEnabled}
+        disabled={!enableToDate}
       />
       <button disabled={!isBookingAllowed} onClick={() => showBookingMessage()}>
         {"Book"}
@@ -226,6 +228,9 @@ function getBookingMessage({ typeOfFlight, fromDate, toDate }) {
     if (!isValidDate(fromDate) || !isValidDate(toDate)) {
       return INVALID;
     }
+    if (isDateBeforeOther(toDate, fromDate)) {
+      return INVALID;
+    }
     return `You have booked a flight on ${fromDate} and return on ${toDate}`;
   } else {
     throw new Error("Invalid flight type");
@@ -243,4 +248,14 @@ function getTodayValidDateString() {
   const year = today.getFullYear().toString().padStart(4, "0");
 
   return `${date}.${month}.${year}`;
+}
+
+function isDateBeforeOther(dateOne, dateTwo) {
+  if (!isValidDate(dateOne) || !isValidDate(dateTwo)) {
+    throw new Error("ill formatted date");
+  }
+
+  const [numDateOne, numDateTwo] = [dateOne, dateTwo].map(getNumberFromDate);
+
+  return numDateOne < numDateTwo;
 }
