@@ -9,6 +9,7 @@ function DateInput(props) {
     <input
       {...restProps}
       className={cx(
+        styles.dateInput,
         {
           [styles.invalidDate]: !isValidDate(restProps.value),
         },

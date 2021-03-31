@@ -1,7 +1,9 @@
 import React from "react";
+import cx from "classnames";
 import PageContainer from "../../components/PageContainer";
 import PageTitle from "../../components/PageTitle";
 import DateInput, { getNumberFromDate, isValidDate } from "./DateInput";
+import styles from "./FlightBooker.module.scss";
 
 function FlightBooker(props) {
   const {
@@ -25,12 +27,21 @@ function FlightBooker(props) {
   return (
     <PageContainer>
       <PageTitle>{"Flight Booker"}</PageTitle>
-      <select value={typeOfFlight} onChange={handleChangeDropdown}>
+      <select
+        className={cx(styles.flightTypeDropdown, styles.bottomSpace)}
+        value={typeOfFlight}
+        onChange={handleChangeDropdown}
+      >
         <option value={FlightType.ONEWAY}>{"One-way flight"}</option>
         <option value={FlightType.RETURN}>{"Return flight"}</option>
       </select>
-      <DateInput value={fromDate} onChange={handleChangeFrom} />
       <DateInput
+        className={styles.bottomSpace}
+        value={fromDate}
+        onChange={handleChangeFrom}
+      />
+      <DateInput
+        className={styles.bottomSpace}
         value={toDate}
         onChange={handleChangeTo}
         disabled={!enableToDate}
