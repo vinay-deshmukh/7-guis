@@ -7,6 +7,7 @@ function Timer(props) {
     initialMaxTimeMs: 5_000,
   });
   React.useEffect(() => {
+    // TODO: maybe stop ticking if elapsed has reached max time?
     const tickDurationMs = 100;
     const interval = setInterval(() => {
       doTick({ byMs: tickDurationMs });
@@ -60,6 +61,9 @@ function timerReducer(state, { type, payload }) {
   switch (type) {
     case DO_TICK: {
       const elapsedTimeMs = state.elapsedTimeMs + payload.byMs;
+      if (elapsedTimeMs > state.maxTimeMs) {
+        return state;
+      }
       return {
         ...state,
         elapsedTimeMs,
