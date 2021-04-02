@@ -147,5 +147,10 @@ function initTimerState({ initialMaxTimeMs }) {
 }
 
 function convertMsToPrettySeconds(ms) {
-  return `${ms / 1000}s`;
+  const floatSeconds = ms / 1000;
+  const wholeSeconds = Math.floor(floatSeconds);
+  const seconds = wholeSeconds.toString().padStart(2);
+
+  const milliseconds = (floatSeconds - wholeSeconds).toFixed(3).slice(2);
+  return `${seconds}.${milliseconds}s`;
 }
