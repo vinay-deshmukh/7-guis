@@ -6,6 +6,7 @@ function Timer(props) {
   const { elapsedTimeMs, maxTimeMs, doTick, resetElapsed } = useTimer({
     initialMaxTimeMs: 5_000,
   });
+  const highLimitMs = 10_000;
   React.useEffect(() => {
     // TODO: maybe stop ticking if elapsed has reached max time?
     const tickDurationMs = 100;
@@ -24,10 +25,15 @@ function Timer(props) {
         {"Elapsed Time: "}
         <progress value={elapsedTimeMs} max={maxTimeMs} />
       </div>
-      <div>{`${elapsedTimeMs / 1000}s`}</div>
+      <div>{convertMsToPrettySeconds(elapsedTimeMs)}</div>
       <div>
         {"Duration: "}
-        <input type="range" />
+        <div>
+          {`Low: ${convertMsToPrettySeconds(0)}`}
+          <input type="range" />
+          {`High: ${convertMsToPrettySeconds(highLimitMs)}`}
+        </div>
+        <div>{`Selected: ${convertMsToPrettySeconds(maxTimeMs)}`}</div>
       </div>
       <button onClick={() => resetElapsed()}>{"Reset"}</button>
     </PageContainer>
@@ -92,4 +98,8 @@ function initTimerState({ initialMaxTimeMs }) {
     elapsedTimeMs: 0,
     maxTimeMs: initialMaxTimeMs,
   };
+}
+
+function convertMsToPrettySeconds(ms) {
+  return `${ms / 1000}s`;
 }
