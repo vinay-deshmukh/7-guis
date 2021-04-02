@@ -66,11 +66,12 @@ function useTimer({ initialMaxTimeMs = 5000 } = {}) {
   const doTick = React.useCallback(({ byMs = 100 } = {}) => {
     dispatch({ type: DO_TICK, payload: { byMs } });
   }, []);
-  const resetElapsed = React.useCallback(() => {
+
+  const resetElapsed = () => {
     dispatch({
       type: RESET_ELAPSED,
     });
-  });
+  };
 
   const updateMaxTime = ({ maxTimeMs }) => {
     dispatch({
