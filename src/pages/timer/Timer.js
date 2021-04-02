@@ -1,6 +1,7 @@
 import React from "react";
 import PageContainer from "../../components/PageContainer";
 import PageTitle from "../../components/PageTitle";
+import styles from "./Timer.module.scss";
 
 function Timer(props) {
   const {
@@ -12,7 +13,9 @@ function Timer(props) {
   } = useTimer({
     initialMaxTimeMs: 5_000,
   });
+
   const highLimitMs = 10_000;
+
   React.useEffect(() => {
     const tickDurationMs = 100;
     const interval = setInterval(() => {
@@ -22,31 +25,44 @@ function Timer(props) {
       clearInterval(interval);
     };
   }, [doTick]);
+
   return (
     <PageContainer>
       <PageTitle>{"Timer"}</PageTitle>
-
-      <div>
-        {"Elapsed Time: "}
-        <progress value={elapsedTimeMs} max={maxTimeMs} />
-      </div>
-      <div>{convertMsToPrettySeconds(elapsedTimeMs)}</div>
-      <div>
-        {"Duration: "}
-        <div>
-          {`Low: ${convertMsToPrettySeconds(0)}`}
-          <input
-            type="range"
-            value={maxTimeMs}
-            max={highLimitMs}
-            onChange={(event) => {
-              updateMaxTime({ maxTimeMs: event.target.value });
-            }}
+      <section className={styles.section}>
+        <h3 className={styles.heading}> {"Elapsed Time: "}</h3>
+        <div className={styles.gaugeContainer}>
+          {convertMsToPrettySeconds(elapsedTimeMs)}
+          <progress
+            className={styles.gauge}
+            value={elapsedTimeMs}
+            max={maxTimeMs}
           />
-          {`High: ${convertMsToPrettySeconds(highLimitMs)}`}
         </div>
-        <div>{`Selected: ${convertMsToPrettySeconds(maxTimeMs)}`}</div>
-      </div>
+      </section>
+
+      <section className={styles.section}>
+        <div className={styles.row}>
+          <h3 className={styles.heading}>{"Duration: "}</h3>
+          <div className={styles.row}>
+            {`Low: ${convertMsToPrettySeconds(0)}`}
+            <input
+              className={styles.slider}
+              type="range"
+              value={maxTimeMs}
+              max={highLimitMs}
+              onChange={(event) => {
+                updateMaxTime({ maxTimeMs: event.target.value });
+              }}
+            />
+            {`High: ${convertMsToPrettySeconds(highLimitMs)}`}
+          </div>
+          <div className={styles.row}>{`Selected: ${convertMsToPrettySeconds(
+            maxTimeMs
+          )}`}</div>
+        </div>
+      </section>
+
       <button onClick={() => resetElapsed()}>{"Reset"}</button>
     </PageContainer>
   );

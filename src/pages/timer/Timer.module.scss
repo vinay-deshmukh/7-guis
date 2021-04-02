@@ -1,0 +1,27 @@
+.gaugeContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.gauge {
+  margin-left: 1rem;
+}
+
+.row {
+  margin: 0.5rem 0;
+}
+
+.slider {
+  margin: 0 1rem;
+}
+
+.section {
+  margin: 1rem 0;
+  padding: 1rem;
+  background: #fdfdfd;
+}
+
+.heading {
+  margin-top: 0;
+}
