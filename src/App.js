@@ -1,4 +1,4 @@
-import "./App.scss";
+import styles from "./App.module.scss";
 import Tasks from "./tasks";
 import { Route, Switch } from "react-router";
 import { Link } from "react-router-dom";
@@ -6,26 +6,38 @@ import { Link } from "react-router-dom";
 function App() {
   return (
     <div className="App">
-      <div>
-        {`
-      Description:
+      <section className={styles.rootDescription}>
+        <h1>{"Description:"}</h1>
+        <div>
+          <p>{`
 
       This Single Page Application (SPA) demonstrates my implementation of the
       7 GUI tasks outlined here
 https://eugenkiss.github.io/7guis/tasks/
+    `}</p>
 
+          <p>
+            {`
     Click on the links below to open the task implementation on the 
     right:
+`}
+          </p>
 
-    1. Counter
-    2. Temperature
-
-
-Note: I have made some changes in the requiremnts due to reasons like challenging myself,
+          <ol>
+            {Tasks.map((task, index) => (
+              <li key={index}>
+                <Link to={task.path}>{task.text}</Link>
+              </li>
+            ))}
+          </ol>
+          <p>
+            {`
+Note: I have made some changes in the requirements due to reasons like challenging myself,
 and at the same time, not venturing too deep for an edge case for a simple side-project.
-    
     `}
-      </div>
+          </p>
+        </div>
+      </section>
       <div>
         {`
       Counter:
@@ -39,13 +51,7 @@ and at the same time, not venturing too deep for an edge case for a simple side-
     `}
       </div>
       {/* <section className="table-contents app-child">
-        <ol>
-          {Tasks.map((task, index) => (
-            <li key={index}>
-              <Link to={task.path}>{task.text}</Link>
-            </li>
-          ))}
-        </ol>
+
       </section>
       <section className="task-container app-child">
         <Switch>
