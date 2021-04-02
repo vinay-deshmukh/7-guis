@@ -3,7 +3,7 @@ import PageContainer from "../../components/PageContainer";
 import PageTitle from "../../components/PageTitle";
 
 function Timer(props) {
-  const { elapsedTimeMs, maxTimeMs, doTick } = useTimer({
+  const { elapsedTimeMs, maxTimeMs, doTick, resetElapsed } = useTimer({
     initialMaxTimeMs: 5_000,
   });
   React.useEffect(() => {
@@ -29,7 +29,7 @@ function Timer(props) {
         {"Duration: "}
         <input type="range" />
       </div>
-      <button>{"Reset"}</button>
+      <button onClick={() => resetElapsed()}>{"Reset"}</button>
     </PageContainer>
   );
 }
@@ -48,14 +48,22 @@ function useTimer({ initialMaxTimeMs = 5000 } = {}) {
   const doTick = React.useCallback(({ byMs = 100 } = {}) => {
     dispatch({ type: DO_TICK, payload: { byMs } });
   }, []);
+  const resetElapsed = React.useCallback(() => {
+    dispatch({
+      type: RESET_ELAPSED,
+    });
+  });
 
   return {
     elapsedTimeMs,
     maxTimeMs,
+
     doTick,
+    resetElapsed,
   };
 }
 const DO_TICK = "doTick";
+const RESET_ELAPSED = "resetElapsed";
 
 function timerReducer(state, { type, payload }) {
   switch (type) {
@@ -67,6 +75,12 @@ function timerReducer(state, { type, payload }) {
       return {
         ...state,
         elapsedTimeMs,
+      };
+    }
+    case RESET_ELAPSED: {
+      return {
+        ...state,
+        elapsedTimeMs: 0,
       };
     }
     default:
