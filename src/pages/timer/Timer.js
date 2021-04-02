@@ -3,12 +3,17 @@ import PageContainer from "../../components/PageContainer";
 import PageTitle from "../../components/PageTitle";
 
 function Timer(props) {
-  const { elapsedTimeMs, maxTimeMs, doTick, resetElapsed } = useTimer({
+  const {
+    elapsedTimeMs,
+    maxTimeMs,
+    doTick,
+    resetElapsed,
+    updateMaxTime,
+  } = useTimer({
     initialMaxTimeMs: 5_000,
   });
   const highLimitMs = 10_000;
   React.useEffect(() => {
-    // TODO: maybe stop ticking if elapsed has reached max time?
     const tickDurationMs = 100;
     const interval = setInterval(() => {
       doTick({ byMs: tickDurationMs });
@@ -30,7 +35,14 @@ function Timer(props) {
         {"Duration: "}
         <div>
           {`Low: ${convertMsToPrettySeconds(0)}`}
-          <input type="range" />
+          <input
+            type="range"
+            value={maxTimeMs}
+            max={highLimitMs}
+            onChange={(event) => {
+              updateMaxTime({ maxTimeMs: event.target.value });
+            }}
+          />
           {`High: ${convertMsToPrettySeconds(highLimitMs)}`}
         </div>
         <div>{`Selected: ${convertMsToPrettySeconds(maxTimeMs)}`}</div>
@@ -60,16 +72,27 @@ function useTimer({ initialMaxTimeMs = 5000 } = {}) {
     });
   });
 
+  const updateMaxTime = ({ maxTimeMs }) => {
+    dispatch({
+      type: UPDATE_MAX_TIME,
+      payload: {
+        maxTimeMs,
+      },
+    });
+  };
+
   return {
     elapsedTimeMs,
     maxTimeMs,
 
     doTick,
     resetElapsed,
+    updateMaxTime,
   };
 }
 const DO_TICK = "doTick";
 const RESET_ELAPSED = "resetElapsed";
+const UPDATE_MAX_TIME = "updateMaxTime";
 
 function timerReducer(state, { type, payload }) {
   switch (type) {
@@ -87,6 +110,12 @@ function timerReducer(state, { type, payload }) {
       return {
         ...state,
         elapsedTimeMs: 0,
+      };
+    }
+    case UPDATE_MAX_TIME: {
+      return {
+        ...state,
+        maxTimeMs: payload.maxTimeMs,
       };
     }
     default:
