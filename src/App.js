@@ -6,7 +6,39 @@ import { Link } from "react-router-dom";
 function App() {
   return (
     <div className="App">
-      <section className="table-contents app-child">
+      <div>
+        {`
+      Description:
+
+      This Single Page Application (SPA) demonstrates my implementation of the
+      7 GUI tasks outlined here
+https://eugenkiss.github.io/7guis/tasks/
+
+    Click on the links below to open the task implementation on the 
+    right:
+
+    1. Counter
+    2. Temperature
+
+
+Note: I have made some changes in the requiremnts due to reasons like challenging myself,
+and at the same time, not venturing too deep for an edge case for a simple side-project.
+    
+    `}
+      </div>
+      <div>
+        {`
+      Counter:
+
+      Implemented Features:
+      1. This
+
+
+      Refer here for the original requirements: eugenkiss#counter
+    
+    `}
+      </div>
+      {/* <section className="table-contents app-child">
         <ol>
           {Tasks.map((task, index) => (
             <li key={index}>
@@ -23,7 +55,7 @@ function App() {
             </Route>
           ))}
         </Switch>
-      </section>
+      </section> */}
     </div>
   );
 }
