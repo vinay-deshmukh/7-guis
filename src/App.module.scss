@@ -17,12 +17,10 @@
   height: 100vh;
   background: wheat;
   padding: 1rem;
+  position: fixed;
 }
 
-.table-contents {
-  background: cornsilk;
-}
-
-.task-container {
+.taskContainer {
   background: lightseagreen;
+  margin-left: 350px;
 }

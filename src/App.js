@@ -38,8 +38,13 @@ and at the same time, not venturing too deep for an edge case for a simple side-
           </p>
         </div>
       </section>
-      <div>
-        {`
+      <div></div>
+      <section className={styles.taskContainer}>
+        <Switch>
+          {Tasks.map(({ path, component: Component }, index) => (
+            <Route key={index} path={path}>
+              <section>
+                {`
       Counter:
 
       Implemented Features:
@@ -49,19 +54,12 @@ and at the same time, not venturing too deep for an edge case for a simple side-
       Refer here for the original requirements: eugenkiss#counter
     
     `}
-      </div>
-      {/* <section className="table-contents app-child">
-
-      </section>
-      <section className="task-container app-child">
-        <Switch>
-          {Tasks.map(({ path, component: Component }, index) => (
-            <Route key={index} path={path}>
+              </section>
               {Component ? <Component /> : "Work in progress"}
             </Route>
           ))}
         </Switch>
-      </section> */}
+      </section>
     </div>
   );
 }
