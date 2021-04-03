@@ -5,7 +5,6 @@
   align-items: center;
   width: 50rem;
   height: 100vh;
-
 }
 
 .defaultScreen {
@@ -33,7 +32,7 @@ $widthRootDescription: 300px;
   margin-left: $widthRootDescription;
   display: flex;
   height: 100vh;
-  
+
   .taskDescription {
     background: lightseagreen;
     width: 240px;
@@ -43,5 +42,17 @@ $widthRootDescription: 300px;
 
   .taskSubapp {
     flex: 1;
+  }
+}
+
+.wipPage {
+  flex: 1;
+  height: 100%;
+  display: grid;
+  place-items: center;
+
+  .wipText {
+    font-size: 2rem;
+    text-align: center;
   }
 }

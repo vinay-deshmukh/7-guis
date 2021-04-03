@@ -41,30 +41,40 @@ and at the same time, not venturing too deep for an edge case for a simple side-
         <Switch>
           {Tasks.map(({ path, component: Component }, index) => (
             <Route key={index} path={path}>
-              <section className={styles.taskDescription}>
-                <h2>{`Counter:`}</h2>
-                <h3>
-                  {`
+              {!Component ? (
+                <section className={styles.wipPage}>
+                  <section className={styles.wipText}>
+                    {`Work in Progress`}
+                  </section>
+                </section>
+              ) : (
+                <>
+                  <section className={styles.taskDescription}>
+                    <h2>{`Counter:`}</h2>
+                    <h3>
+                      {`
       Implemented Features:
 `}
-                </h3>
-                <p>
-                  {`
+                    </h3>
+                    <p>
+                      {`
 
       1. This
 
 `}
-                </p>
-                {`
+                    </p>
+                    {`
 
 
       Refer here for the original requirements: eugenkiss#counter
     
     `}
-              </section>
-              <section className={styles.taskSubapp}>
-                {Component ? <Component /> : "Work in progress"}
-              </section>
+                  </section>
+                  <section className={styles.taskSubapp}>
+                    <Component />
+                  </section>
+                </>
+              )}
             </Route>
           ))}
           <Route>
