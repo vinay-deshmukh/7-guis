@@ -9,12 +9,20 @@ function App() {
       <section className={styles.rootDescription}>
         <h1>{"Description:"}</h1>
         <div>
-          <p>{`
+          <p>
+            {`
 
       This Single Page Application (SPA) demonstrates my implementation of the
-      7 GUI tasks outlined here
-https://eugenkiss.github.io/7guis/tasks/
-    `}</p>
+      7 GUI tasks outlined `}
+            <a
+              href="https://eugenkiss.github.io/7guis/tasks/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {`here`}
+            </a>
+            {`.`}
+          </p>
           <p>
             {`
     Click on the links below to open the task implementation on the 
