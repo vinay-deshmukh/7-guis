@@ -23,7 +23,7 @@ $widthRootDescription: 300px;
 .rootDescription {
   width: $widthRootDescription;
   height: 100vh;
-  background: wheat;
+  background: #b8ebd0;
   padding: 1rem;
   position: fixed;
 }
@@ -34,7 +34,7 @@ $widthRootDescription: 300px;
   height: 100vh;
 
   .taskDescription {
-    background: lightseagreen;
+    background: #cfddd7;
     width: 240px;
     height: 100%;
     padding: 1rem;
@@ -42,6 +42,7 @@ $widthRootDescription: 300px;
 
   .taskSubapp {
     flex: 1;
+    background: #b0c7bd;
   }
 }
 
