@@ -1,5 +1,5 @@
 import styles from "./App.module.scss";
-import Tasks from "./tasks";
+import { tasks } from "./tasks";
 import { Route, Switch } from "react-router";
 import { Link } from "react-router-dom";
 
@@ -23,7 +23,7 @@ https://eugenkiss.github.io/7guis/tasks/
           </p>
 
           <ol>
-            {Tasks.map((task, index) => (
+            {tasks.map((task, index) => (
               <li key={index}>
                 <Link to={task.path}>{task.text}</Link>
               </li>
@@ -39,7 +39,7 @@ and at the same time, not venturing too deep for an edge case for a simple side-
       </section>
       <section className={styles.taskContainer}>
         <Switch>
-          {Tasks.map(({ path, component: Component }, index) => (
+          {tasks.map(({ path, component: Component }, index) => (
             <Route key={index} path={path}>
               {!Component ? (
                 <section className={styles.wipPage}>

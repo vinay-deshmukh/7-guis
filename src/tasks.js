@@ -3,7 +3,7 @@ import FlightBooker from "./pages/flightBooker";
 import TemperatureConverter from "./pages/temperatureConverter";
 import Timer from "./pages/timer";
 
-const tasks = [
+export const tasks = [
   {
     text: "Counter",
     path: "/tasks/counter",
@@ -38,4 +38,3 @@ const tasks = [
   },
 ];
 
-export default tasks;
