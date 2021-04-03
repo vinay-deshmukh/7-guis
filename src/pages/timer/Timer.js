@@ -1,6 +1,7 @@
 import React from "react";
 import PageContainer from "../../components/PageContainer";
 import PageTitle from "../../components/PageTitle";
+import Button from "../../components/Button";
 import styles from "./Timer.module.scss";
 
 function Timer(props) {
@@ -63,7 +64,7 @@ function Timer(props) {
         </div>
       </section>
 
-      <button onClick={() => resetElapsed()}>{"Reset"}</button>
+      <Button onClick={() => resetElapsed()}>{"Reset"}</Button>
     </PageContainer>
   );
 }

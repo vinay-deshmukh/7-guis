@@ -3,6 +3,7 @@ import React from "react";
 import styles from "./Counter.module.scss";
 import PageContainer from "../../components/PageContainer";
 import PageTitle from "../../components/PageTitle";
+import Button from "../../components/Button";
 
 function Counter(props) {
   const { count, increment, decrement, reset } = useCounter();
@@ -11,15 +12,15 @@ function Counter(props) {
       <PageTitle>{"Counter"}</PageTitle>
       <input className={styles.count} readOnly value={count} />
       <div className={styles.buttonsContainer}>
-        <button className={styles.button} onClick={() => increment()}>
+        <Button className={styles.button} onClick={() => increment()}>
           {"Increment"}
-        </button>
-        <button className={styles.button} onClick={() => decrement()}>
+        </Button>
+        <Button className={styles.button} onClick={() => decrement()}>
           {"Decrement"}
-        </button>
-        <button className={styles.button} onClick={() => reset()}>
+        </Button>
+        <Button className={styles.button} onClick={() => reset()}>
           {"Reset"}
-        </button>
+        </Button>
       </div>
     </PageContainer>
   );

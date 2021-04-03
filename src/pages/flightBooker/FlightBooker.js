@@ -2,6 +2,7 @@ import React from "react";
 import cx from "classnames";
 import PageContainer from "../../components/PageContainer";
 import PageTitle from "../../components/PageTitle";
+import Button from "../../components/Button";
 import DateInput, { getNumberFromDate, isValidDate } from "./DateInput";
 import styles from "./FlightBooker.module.scss";
 
@@ -46,9 +47,9 @@ function FlightBooker(props) {
         onChange={handleChangeTo}
         disabled={!enableToDate}
       />
-      <button disabled={!isBookingAllowed} onClick={() => showBookingMessage()}>
+      <Button disabled={!isBookingAllowed} onClick={() => showBookingMessage()}>
         {"Book"}
-      </button>
+      </Button>
       {isBookingMessageVisible ? <p>{bookingConfirmMessage}</p> : null}
     </PageContainer>
   );
