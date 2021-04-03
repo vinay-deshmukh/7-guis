@@ -12,8 +12,9 @@
   }
 }
 
+$widthRootDescription: 300px;
 .rootDescription {
-  width: 350px;
+  width: $widthRootDescription;
   height: 100vh;
   background: wheat;
   padding: 1rem;
@@ -21,6 +22,18 @@
 }
 
 .taskContainer {
-  background: lightseagreen;
-  margin-left: 350px;
+  margin-left: $widthRootDescription;
+  display: flex;
+  height: 100vh;
+  
+  .taskDescription {
+    background: lightseagreen;
+    width: 240px;
+    height: 100%;
+    padding: 1rem;
+  }
+
+  .taskSubapp {
+    flex: 1;
+  }
 }

@@ -15,7 +15,6 @@ function App() {
       7 GUI tasks outlined here
 https://eugenkiss.github.io/7guis/tasks/
     `}</p>
-
           <p>
             {`
     Click on the links below to open the task implementation on the 
@@ -38,24 +37,34 @@ and at the same time, not venturing too deep for an edge case for a simple side-
           </p>
         </div>
       </section>
-      <div></div>
       <section className={styles.taskContainer}>
         <Switch>
           {Tasks.map(({ path, component: Component }, index) => (
             <Route key={index} path={path}>
-              <section>
-                {`
-      Counter:
-
+              <section className={styles.taskDescription}>
+                <h2>{`Counter:`}</h2>
+                <h3>
+                  {`
       Implemented Features:
+`}
+                </h3>
+                <p>
+                  {`
+
       1. This
+
+`}
+                </p>
+                {`
 
 
       Refer here for the original requirements: eugenkiss#counter
     
     `}
               </section>
-              {Component ? <Component /> : "Work in progress"}
+              <section className={styles.taskSubapp}>
+                {Component ? <Component /> : "Work in progress"}
+              </section>
             </Route>
           ))}
         </Switch>
