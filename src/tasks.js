@@ -6,32 +6,35 @@ import Timer from "./pages/timer";
 const tasks = [
   {
     text: "Counter",
-    path: "/counter",
+    path: "/tasks/counter",
     component: Counter,
   },
   {
     text: "Temperature Counter",
-    path: "/temperature",
+    path: "/tasks/temperature",
     component: TemperatureConverter,
   },
   {
     text: "Flight booker",
-    path: "/flightBooker",
+    path: "/tasks/flightBooker",
     component: FlightBooker,
   },
   {
     text: "Timer",
-    path: "/timer",
+    path: "/tasks/timer",
     component: Timer,
   },
   {
     text: "CRUD",
+    path: "/tasks/"
   },
   {
     text: "Circle Drawer",
+    path: "/tasks/"
   },
   {
     text: "Cells",
+    path: "/tasks/"
   },
 ];
 

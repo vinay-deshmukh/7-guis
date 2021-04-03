@@ -6,9 +6,17 @@
   width: 50rem;
   height: 100vh;
 
-  .app-child {
-    width: 48%;
-    height: 60%;
+}
+
+.defaultScreen {
+  display: grid;
+  place-items: center;
+  flex: 1;
+
+  .textInstruction {
+    font-size: 2rem;
+    text-align: justify;
+    width: 400px;
   }
 }
 

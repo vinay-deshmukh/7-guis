@@ -67,6 +67,13 @@ and at the same time, not venturing too deep for an edge case for a simple side-
               </section>
             </Route>
           ))}
+          <Route>
+            <section className={styles.defaultScreen}>
+              <p className={styles.textInstruction}>
+                {`Click on one of the links on the left to see the task implementations!`}
+              </p>
+            </section>
+          </Route>
         </Switch>
       </section>
     </div>
