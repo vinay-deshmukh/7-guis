@@ -39,6 +39,7 @@ function Timer(props) {
             value={elapsedTimeMs}
             max={maxTimeMs}
           />
+          {convertMsToPrettySeconds(maxTimeMs)}
         </div>
       </section>
 
