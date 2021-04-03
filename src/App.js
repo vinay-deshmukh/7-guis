@@ -39,44 +39,31 @@ and at the same time, not venturing too deep for an edge case for a simple side-
       </section>
       <section className={styles.taskContainer}>
         <Switch>
-          {tasks.map(({ path, component: Component }, index) => (
-            <Route key={index} path={path}>
-              {!Component ? (
-                <section className={styles.wipPage}>
-                  <section className={styles.wipText}>
-                    {`Work in Progress`}
-                  </section>
-                </section>
-              ) : (
-                <>
-                  <section className={styles.taskDescription}>
-                    <h2>{`Counter:`}</h2>
-                    <h3>
-                      {`
-      Implemented Features:
-`}
-                    </h3>
-                    <p>
-                      {`
-
-      1. This
-
-`}
-                    </p>
-                    {`
-
-
-      Refer here for the original requirements: eugenkiss#counter
-    
-    `}
-                  </section>
-                  <section className={styles.taskSubapp}>
-                    <Component />
-                  </section>
-                </>
-              )}
-            </Route>
-          ))}
+          {tasks.map(
+            (
+              { path, component: Component, taskDescription: TaskDescription },
+              index
+            ) => (
+              <Route key={index} path={path}>
+                {!Component ? (
+                  <WorkInProgressSection />
+                ) : (
+                  <>
+                    <section className={styles.taskDescription}>
+                      {TaskDescription ? (
+                        <TaskDescription />
+                      ) : (
+                        <WorkInProgressSection />
+                      )}
+                    </section>
+                    <section className={styles.taskSubapp}>
+                      <Component />
+                    </section>
+                  </>
+                )}
+              </Route>
+            )
+          )}
           <Route>
             <section className={styles.defaultScreen}>
               <p className={styles.textInstruction}>
@@ -91,3 +78,11 @@ and at the same time, not venturing too deep for an edge case for a simple side-
 }
 
 export default App;
+
+function WorkInProgressSection() {
+  return (
+    <section className={styles.wipPage}>
+      <section className={styles.wipText}>{`Work in Progress`}</section>
+    </section>
+  );
+}
